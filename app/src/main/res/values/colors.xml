@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Background -->
+    <color name="background">#F5F7FA</color> <!-- Very light gray-blue -->
+    <color name="surface">#FFFFFF</color>    <!-- Pure white for cards etc. -->
+
+    <!-- Text -->
+    <color name="text_primary">#202124</color> <!-- Dark gray -->
+    <color name="text_secondary">#5F6368</color> <!-- Medium gray -->
+
+    <!-- Buttons -->
+    <color name="button_primary">#4A90E2</color>  <!-- Calm medium blue -->
+    <color name="button_primary_pressed">#357ABD</color> <!-- Slightly darker blue for pressed -->
+    <color name="button_secondary">#7B8D93</color>  <!-- Muted steel gray -->
+    <color name="button_secondary_pressed">#5A6B70</color>
+
+    <!-- Accent / Highlights -->
+    <color name="accent">#E37400</color>  <!-- Warm orange -->
+</resources>

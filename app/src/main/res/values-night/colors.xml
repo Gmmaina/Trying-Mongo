@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Background -->
+    <color name="background">#121212</color>    <!-- Almost black -->
+    <color name="surface">#1E1E1E</color>       <!-- Dark gray for cards -->
+
+    <!-- Text -->
+    <color name="text_primary">#E0E0E0</color>  <!-- Light gray -->
+    <color name="text_secondary">#A0A0A0</color> <!-- Medium gray -->
+
+    <!-- Buttons -->
+    <color name="button_primary">#3B72FF</color>  <!-- Bright but not glaring blue -->
+    <color name="button_primary_pressed">#2B54CC</color> <!-- Darker blue pressed -->
+    <color name="button_secondary">#616161</color>  <!-- Muted gray -->
+    <color name="button_secondary_pressed">#444444</color>
+
+    <!-- Accent / Highlights -->
+    <color name="accent">#FF9D00</color> <!-- Warm orange -->
+</resources>

@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">New MongoDb</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="enter_username_or_email_address">Enter username or email address</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="login">Login</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="username_or_email">Username or Email</string>
+    <string name="welcome_back">Welcome Back!</string>
+    <string name="welcome">Welcome</string>
+    <string name="email">Email</string>
+    <string name="username">Username</string>
+    <string name="verify_otp">Verify OTP</string>
+    <string name="didn_t_receive_otp">Didn\'t receive OTP?</string>
+    <string name="resend">Resend.</string>
+    <string name="otp">OTP</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="back_button">Back button</string>
+</resources>

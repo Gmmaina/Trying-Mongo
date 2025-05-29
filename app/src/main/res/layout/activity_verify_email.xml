@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".authentication.activities.VerifyEmailActivity"
+    android:background="@color/background">
+
+    <ImageButton
+        android:id="@+id/backBtn"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:contentDescription="@string/back_button"
+        android:background="@drawable/btn_background"
+        android:src="@drawable/baseline_arrow_back_24"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/otpAnimation"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        app:lottie_rawRes="@raw/otp_animation"
+        android:layout_marginTop="100dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"/>
+
+    <TextView
+        android:id="@+id/emailInstructions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/otpAnimation"
+        android:layout_marginTop="20dp"
+        tools:text="Enter the 6-digit code sent to abc@gmail.com"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilOtp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/emailInstructions">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tieOtp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/otp"
+            android:drawableStart="@drawable/lock"
+            android:drawablePadding="10dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/resendCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/resend"
+        android:textColor="@color/text_primary"
+        android:fontFamily="@font/delius_unicase_bold"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="@id/tilOtp"
+        app:layout_constraintTop_toBottomOf="@id/tilOtp" />
+
+    <Button
+        android:id="@+id/verifyOtp"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="@string/verify_otp"
+        android:fontFamily="@font/delius_unicase_bold"
+        android:backgroundTint="@color/button_primary"
+        android:textColor="@color/text_primary"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="30dp"
+        app:layout_constraintStart_toStartOf="@id/tilOtp"
+        app:layout_constraintEnd_toEndOf="@id/resendCode"
+        app:layout_constraintTop_toBottomOf="@id/resendCode"/>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/progress_circular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:lottie_rawRes="@raw/loading"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tilOtp"
+        app:layout_constraintBottom_toTopOf="@id/verifyOtp"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
