@@ -48,13 +48,16 @@ class LoginActivity : AppCompatActivity() {
             when (state) {
                 is AuthState.Loading -> {
                     showLoading(true)
+                    binding.loginBtn.isEnabled = false
                 }
                 is AuthState.Success -> {
                     showLoading(false)
+                    binding.loginBtn.isEnabled = true
                     handleLoginSuccess(state.response)
                 }
                 is AuthState.Error -> {
                     showLoading(false)
+                    binding.loginBtn.isEnabled = true
                     Toast.makeText(this, state.message, Toast.LENGTH_LONG).show()
                 }
             }
@@ -67,18 +70,29 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun handleLoginSuccess(response: AuthResponse) {
-        Toast.makeText(this, response.message, Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "user is ${response.email}", Toast.LENGTH_SHORT).show()
 
         // Check verification status from backend response
-        if (response.isVerified == true) {
+        when (response.isVerified) {
             // User verified - navigate to main activity
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
-        } else {
-            // User not verified - navigate to email verification
-            val intent = Intent(this, VerifyEmailActivity::class.java)
-            intent.putExtra("email", response.email)
-            startActivity(intent)
+            true -> {
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            }
+            false -> {
+                // User not verified - navigate to email verification
+                if (response.email != null){
+                    val intent = Intent(this, VerifyEmailActivity::class.java)
+                    intent.putExtra("email", response.email)
+                    startActivity(intent)
+
+                } else{
+                    Toast.makeText(this, "Login failed: email not provided.", Toast.LENGTH_SHORT).show()
+                }
+            }
+            null -> {
+                Toast.makeText(this, "An error occurred!", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -88,7 +102,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun handleSignUp() {
-        startActivity(Intent(this, SignUpActivity::class.java))
+        startActivity(Intent(this, VerifyEmailActivity::class.java))
     }
 
     private fun handleLogin() {

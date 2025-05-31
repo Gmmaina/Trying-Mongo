@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NewMongoDb">
         <activity
-            android:name=".authentication.activities.OtpVerificationActivity"
+            android:name=".authentication.activities.VerifyEmailActivity"
             android:exported="false" />
         <activity
             android:name=".authentication.activities.SignUpActivity"

@@ -44,10 +44,10 @@ class VerifyEmailActivity : AppCompatActivity() {
             insets
         }
 
-        email = intent.getStringExtra("email").toString()
+        email = intent.getStringExtra("email") ?: ""
         binding.emailInstructions.text = "OTP sent to $email"
 
-        if (email.isEmpty()) {
+        if (email.isBlank()) {
             Toast.makeText(this, "Email not provided", Toast.LENGTH_SHORT).show()
             finish()
             return
@@ -72,8 +72,12 @@ class VerifyEmailActivity : AppCompatActivity() {
                 }
                 is AuthState.Success -> {
                     showLoading(false)
-                    startActivity(Intent(this, MainActivity::class.java))
-                    finish()
+                    if (state.response.isVerified == true){
+                        startActivity(Intent(this, MainActivity::class.java))
+                        finish()
+                    }else {
+                        Toast.makeText(this, "OTP verification failed!", Toast.LENGTH_LONG).show()
+                    }
                 }
                 is AuthState.Error -> {
                     showLoading(false)

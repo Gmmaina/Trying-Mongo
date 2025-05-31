@@ -10,7 +10,6 @@ import com.example.newmongodb.authentication.repository.AuthRepository
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import com.google.gson.Gson
-import com.google.gson.JsonObject
 
 class AuthViewModel(private val repository: AuthRepository): ViewModel(){
     private val _authState = MutableLiveData<AuthState>()
@@ -52,7 +51,6 @@ class AuthViewModel(private val repository: AuthRepository): ViewModel(){
         }
     }
 
-    // Fixed: Changed from Long to String to match backend OTP format
     fun verifyOtp(email: String, otp: String){
         _authState.value = AuthState.Loading
         viewModelScope.launch {
@@ -66,37 +64,29 @@ class AuthViewModel(private val repository: AuthRepository): ViewModel(){
     }
 
     private fun handleResponse(response: Response<AuthResponse>) {
-        if (response.isSuccessful && response.body() != null) {
-            _authState.value = AuthState.Success(response.body()!!)
-        } else if (response.code() == 403 && response.body() != null) {
-            // Handle 403 Forbidden - User not verified but response body contains user info
-            _authState.value = AuthState.Success(response.body()!!)
-        } else {
-            // Handle HTTP error codes
-            val errorMessage = when (response.code()) {
-                400 -> "Bad request"
-                401 -> "Invalid credentials"
-                409 -> "Conflict - User already exists"
-                404 -> "User not found"
-                429 -> "Too many requests - please wait before trying again"
-                500 -> "Server error"
-                else -> {
-                    // Try to parse error message from response body
-                    try {
-                        val errorBody = response.errorBody()?.string()
-                        if (errorBody != null) {
-                            val gson = Gson()
-                            val errorJson = gson.fromJson(errorBody, JsonObject::class.java)
-                            errorJson.get("message")?.asString ?: "Unknown error"
-                        } else {
-                            "Unknown error"
-                        }
-                    } catch (e: Exception) {
-                        "Error parsing server response"
-                    }
+        try {
+            // First, try to get response from body (for successful status codes)
+            var authResponse = response.body()
+
+            // If body is null, try to parse from errorBody (for error status codes)
+            if (authResponse == null) {
+                val errorBody = response.errorBody()?.string()
+                if (errorBody != null) {
+                    val gson = Gson()
+                    authResponse = gson.fromJson(errorBody, AuthResponse::class.java)
                 }
             }
-            _authState.value = AuthState.Error(errorMessage)
+
+            // If we successfully parsed an AuthResponse, treat it as success
+            // The navigation logic will be handled based on the response content, not status codes
+            if (authResponse != null) {
+                _authState.value = AuthState.Success(authResponse)
+            } else {
+                _authState.value = AuthState.Error("Unable to process server response")
+            }
+
+        } catch (e: Exception) {
+            _authState.value = AuthState.Error("Error processing server response: ${e.message}")
         }
     }
 }

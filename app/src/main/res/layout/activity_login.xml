@@ -146,14 +146,14 @@
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/progress_circular"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             app:lottie_rawRes="@raw/loading"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
             android:visibility="gone"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tilPassword"
+            app:layout_constraintBottom_toTopOf="@id/loginBtn"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
